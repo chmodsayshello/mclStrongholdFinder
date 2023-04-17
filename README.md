@@ -1,6 +1,8 @@
 # mclStrongholdFinder
 
-<p>A simple python script to find all strongholds within a given [MineClone2](https://git.minetest.land/MineClone2/MineClone2) World.</p>
+A simple python script to find all strongholds within a given [MineClone2][Mineclone2URL] World.
+
+[Mineclone2URL]:https://git.minetest.land/MineClone2/MineClone2
 ----
 
 ## How to use:
