@@ -12,3 +12,6 @@ class PseudoRandom:
 
     def randminmax(self,min,max):
         return (self.rand() % (max - min +1)) + min
+
+    def reset(self):
+        self.next = self.seed
