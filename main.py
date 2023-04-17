@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from Random import PseudoRandom
 
 stronghold_rings = [
     [3,1408,2688],
@@ -15,26 +16,13 @@ stronghold_rings = [
 bedrock_max = -58
 overworld_min = -62
 
-def rand():
-    global next
-    next = next * 1103515245 + 12345
-    return (next//65536) % 32768
-
-def randminmax(min,max):
-    return (rand() % (max - min +1)) + min
-
-def srand(seed):
-    global next
-    next = seed
-
-
 worldseed = int(input("Please enter your world seed (No text seeds, numberic form only!): "))
 print("\nEnter 'Y' if your world is superflat, anything else if its not!")
 print("If you don't specify this correctly, you'll get wrong coords!\n")
 
 superflat = input("Superflat? :") == 'Y'
 
-srand(worldseed)
+pr = PseudoRandom(worldseed)
 
 print("Starting looking for strongholds on world with seed {seed}, superflat: {superflat}".format(seed=worldseed,superflat=superflat))
 print("\n\n")
@@ -43,15 +31,15 @@ print("\n\n")
 for s in range(0, len(stronghold_rings)):
     ring = stronghold_rings[s]
 
-    angle = rand()
+    angle = pr.rand()
 
     angle = (angle / 32767) * (math.pi*2)
 
     for a in range(1, ring[0]+1):
-        dist = randminmax(ring[1],ring[2])
+        dist = pr.randminmax(ring[1],ring[2])
 
         if superflat != True:
-            randminmax(bedrock_max+1,overworld_min+68) #mineclone would do height calculations here, and uses "random" numbers if world is NOT superflat
+            pr.randminmax(bedrock_max+1,overworld_min+68) #mineclone would do height calculations here, and uses "random" numbers if world is NOT superflat
             #however, that changed the next number, so I have to do that here as well
 
         pos = np.array([math.cos(angle) * dist , math.sin(angle) * dist])
