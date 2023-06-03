@@ -21,7 +21,10 @@ class Finder:
     def __init__(self,worldseed,superflat):
         self.worldseed = worldseed
         self.superflat = superflat
-        self.pr = PseudoRandom(worldseed)
+        self.pr = PseudoRandom(self.luaSeed())
+
+    def luaSeed(self):
+        return np.uint(np.double(self.worldseed)).item()
 
     def getSeed(self):
         return self.worldseed
